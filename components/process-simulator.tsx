@@ -16,6 +16,8 @@ import { SummaryResults } from "./results/summary-results"
 import { calculateProcess } from "@/lib/process-calculator"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
+import { DetailedHeatBalanceResults } from "./results/detailed-heat-balance-results"
+import { DetailedEnergyBalanceResults } from "./results/detailed-energy-balance-results"
 
 export function ProcessSimulator() {
   const [reactorFeed, setReactorFeed] = useState<string>("100")
@@ -100,8 +102,10 @@ export function ProcessSimulator() {
             <TabsTrigger value="flash">Flash Unit</TabsTrigger>
             <TabsTrigger value="scrubber">Scrubber</TabsTrigger>
             <TabsTrigger value="columns">Columns</TabsTrigger>
-            <TabsTrigger value="heat">Heat Balance</TabsTrigger>
-            <TabsTrigger value="energy">Energy Balance</TabsTrigger>
+            <TabsTrigger value="heat">Heat Summary</TabsTrigger>
+            <TabsTrigger value="heat-detail">Heat Detail</TabsTrigger>
+            <TabsTrigger value="energy">Energy Summary</TabsTrigger>
+            <TabsTrigger value="energy-detail">Energy Detail</TabsTrigger>
           </TabsList>
 
           <TabsContent value="summary" className="mt-4">
@@ -132,8 +136,16 @@ export function ProcessSimulator() {
             <HeatBalanceResults results={results.heatBalance} />
           </TabsContent>
 
+          <TabsContent value="heat-detail" className="mt-4">
+            <DetailedHeatBalanceResults results={results.detailedHeatBalance} />
+          </TabsContent>
+
           <TabsContent value="energy" className="mt-4">
             <EnergyBalanceResults results={results.energyBalance} />
+          </TabsContent>
+
+          <TabsContent value="energy-detail" className="mt-4">
+            <DetailedEnergyBalanceResults results={results.detailedEnergyBalance} />
           </TabsContent>
         </Tabs>
       )}
